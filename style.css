@@ -1,31 +1,34 @@
+/* --- Global --- */
 body, html {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
   font-family: Arial, sans-serif;
-  overflow: hidden;
   background: #111;
+  overflow: hidden;
 }
 
-/* Background layer */
 #background {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
 }
 
-/* Split-screen half-half styles for options */
+/* --- Main Options --- */
 .main-options {
   position: absolute;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   z-index: 1;
 }
+
 .half {
   width: 50vw;
   height: 100vh;
@@ -37,65 +40,98 @@ body, html {
   user-select: none;
   transition: background 0.2s;
 }
+
 .left-option {
   background: rgba(40,40,40,0.85);
   color: #fff;
   border-right: 2px solid #aaa;
 }
-.left-option:hover {
-  background: rgba(251,49,49,0.36); /* faded red */
-}
+.left-option:hover { background: rgba(251,49,49,0.36); }
+
 .right-option {
   background: rgba(24,24,24,0.85);
   color: #fff;
 }
-.right-option:hover {
-  background: rgba(33,107,235,0.36); /* faded blue */
-}
+.right-option:hover { background: rgba(33,107,235,0.36); }
 
-/* Section: Either bots or games full-screen */
+/* --- Sections --- */
 .section {
   position: absolute;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 2;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Bots section - centered COMING SOON */
-.coming-soon {
-  font-size: 5vw;
+.bots-content {
+  width: 85%;
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 30px;
   color: #fff;
-  font-weight: bold;
-  letter-spacing: 4px;
-  text-shadow: 0 0 24px #222c;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background: rgba(20,20,20,0.55);
+  border-radius: 18px;
+  box-shadow: 0 0 20px #0007;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.8s ease;
 }
 
-/* Games section - discord link at the bottom, no box */
-.discord-link-bottom {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- WIP Header --- */
+.wip-header {
+  text-align: center;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.gear-img {
+  width: 55px;
+  height: 55px;
   position: absolute;
-  bottom: 40px;
-  left: 0;
+  animation: rotate 4s linear infinite;
+  opacity: 0.9;
+}
+.gear1 { left: 10%; top: -20px; animation-duration: 3.5s; }
+.gear2 { right: 10%; top: -20px; animation-direction: reverse; }
+.gear3 { left: 50%; top: -70px; transform: translateX(-50%); width: 40px; height: 40px; }
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Text & Discord --- */
+.bots-text h2 { margin-bottom: 10px; font-size: 1.7rem; font-weight: bold; }
+.bots-text h3 { margin-top: 25px; font-size: 1.4rem; }
+.bots-text p { line-height: 1.5rem; margin-bottom: 14px; }
+.bots-text ul { margin-left: 20px; margin-top: 10px; }
+.bots-text li { margin-bottom: 6px; font-size: 1rem; }
+
+.discord-link-bottom {
+  position: relative;
+  margin-top: 60vh;
   width: 100vw;
   text-align: center;
   color: #fff;
   font-size: 1.7rem;
-  font-weight: 400;
 }
 .discord-link-bottom a {
   color: #f08;
   font-size: 1.35rem;
   text-decoration: underline;
-  word-break: break-all;
+  word-break: break-word;
 }
 
-/* Back button */
+/* --- Back Button --- */
 .back-btn {
   position: absolute;
   top: 22px;
@@ -111,15 +147,14 @@ body, html {
   box-shadow: 0 2px 10px #0006;
   transition: background 0.2s;
 }
-.back-btn:hover {
-  background: #444d;
-}
+.back-btn:hover { background: #444d; }
 
-/* Responsive adjustments */
+/* --- Responsive --- */
 @media (max-width: 700px) {
   .half { font-size: 2rem; }
-  .coming-soon { font-size: 9vw; }
-  .discord-link-bottom { font-size: 1.15rem; }
+  .bots-content { width: 92%; padding: 20px; margin-top: 90px; }
+  .discord-link-bottom { font-size: 1.15rem; margin-top: 50vh; }
   .discord-link-bottom a { font-size: 1rem; }
+  .gear-img { display: none; }
   .back-btn { padding: 5px 12px; font-size: 0.88rem; }
 }
